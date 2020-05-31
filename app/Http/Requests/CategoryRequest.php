@@ -15,7 +15,7 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['bail', 'required', 'string', 'max:255'],
+            'name' => ['bail', 'required', 'string', 'min:4', 'max:255'],
         ];
     }
 }

@@ -10,29 +10,46 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        // return view('categories.index');
+        $categories = Category::all();
+
+        return view('categories.index', compact('categories'));
+    }
+
+    public function create()
+    {
+        return view('categories.create');
     }
 
     public function store(CategoryRequest $request)
     {
-        // $this->authorize("create", Category::class);
-        //
+        Category::create($request->validated());
+
+        return redirect()->route('categories.index');
     }
 
     public function show(Category $category)
     {
-        // $this->authorize("view", Category::class);
-        //
+        $category->load('posts');
+
+        return view('categories.show', compact('category'));
+    }
+
+    public function edit(Category $category)
+    {
+        return view('categories.edit', compact('category'));
     }
 
     public function update(CategoryRequest $request,Category $category)
     {
-        // $this->authorize("update", Category::class);
-        //
+        $category->update($request->validated());
+
+        return redirect()->route('categories.index');
     }
 
     public function destroy(Category $category)
     {
-        
+        $category->delete();
+
+        return redirect()->route('categories.index');
     }
 }
