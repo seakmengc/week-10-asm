@@ -52,4 +52,14 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index');
     }
+
+    public function ajaxDestroy(Category $category)
+    {
+        $category->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Deleted'
+        ]);
+    }
 }

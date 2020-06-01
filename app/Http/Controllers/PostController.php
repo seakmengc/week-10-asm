@@ -66,4 +66,14 @@ class PostController extends Controller
 
         return redirect()->route('posts.index');
     }
+
+    public function ajaxDestroy(Post $post)
+    {
+        $post->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Deleted'
+        ]);
+    }
 }

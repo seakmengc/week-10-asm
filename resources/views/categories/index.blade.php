@@ -19,7 +19,7 @@
 
                         <tbody>
                         @forelse ($categories as $ind => $category)
-                            <tr>
+                            <tr id="category-{{ $category->id }}">
                                 <td>{{ $ind + 1 }}</td>
                                 <td>{{ $category->name }}</td>
                                 <td>
@@ -35,6 +35,8 @@
 
                                         <button type="submit" class="btn btn-outline-danger">Delete</button>
                                     </form>
+
+                                    <button type="submit" class="btn btn-outline-danger ajax-delete" data-url="{{ route('categories.ajax_delete', $category) }}" data-id="category-{{ $category->id }}">Ajax Delete</button>
                                 </td>
                             </tr>
                         @empty

@@ -20,7 +20,7 @@
 
                         <tbody>
                         @forelse ($posts as $ind => $post)
-                            <tr>
+                            <tr id="post-{{ $post->id }}">
                                 <td>{{ $ind + 1 }}</td>
                                 <td>{{ $post->name }}</td>
                                 <td><a href="{{ route('categories.show', $post->category) }}">{{ $post->category->name }}</a></td>
@@ -37,6 +37,8 @@
 
                                         <button type="submit" class="btn btn-outline-danger">Delete</button>
                                     </form>
+
+                                    <button type="submit" class="btn btn-outline-danger ajax-delete" data-url="{{ route('posts.ajax_delete', $post) }}" data-id="post-{{ $post->id }}">Ajax Delete</button>
                                 </td>
                             </tr>
                         @empty
