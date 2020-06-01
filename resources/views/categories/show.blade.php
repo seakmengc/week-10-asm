@@ -10,7 +10,7 @@
                     <h5 class="pl-2 pt-3">Posts:</h5>
                     <ul>
                         @forelse($category->posts as $ind => $post)
-                            <li>$post->name</li>
+                            <li><a href="{{ route('posts.show', $post) }}">{{ $post->name }}</a></li>
                         @empty
                             <li>No post yet in this category.</li>
                         @endforelse

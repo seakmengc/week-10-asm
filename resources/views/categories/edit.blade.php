@@ -13,8 +13,9 @@
                         <div class="form-group">
                             <label for="name">Name *</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') ?? $category->name }}" required>
+                            <p class="text-danger">@error('name') {{ $errors->first('name') }} @enderror</p>
                         </div>
-                        <p class="text-danger">@error('name') {{ $errors->first('name') }} @enderror</p>
+                        
 
 
                         <button type="submit" class="btn btn-primary">Submit</button>
