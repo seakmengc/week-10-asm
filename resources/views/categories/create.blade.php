@@ -15,7 +15,6 @@
                         </div>
                         <p class="text-danger">@error('name') {{ $errors->first('name') }} @enderror</p>
 
-
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>

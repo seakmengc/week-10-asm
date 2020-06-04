@@ -12,7 +12,7 @@ class PostController extends Controller
     public function index()
     {
         // $this->authorize("viewAny", Post::class);
-        $posts = Post::with('category')->paginate();
+        $posts = Post::with('category')->paginate(10);
 
         return view('posts.index', compact('posts'));
     }
