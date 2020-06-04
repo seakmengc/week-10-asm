@@ -20,6 +20,10 @@ class CreatePostsTable extends Migration
                 ->cascadeOnDelete();
 
             $table->string('name');
+
+            $table->foreignId('author_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
             
             $table->timestamps();
         });
