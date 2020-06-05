@@ -11,7 +11,6 @@ class PostController extends Controller
 {
     public function index()
     {
-        // $this->authorize("viewAny", Post::class);
         $posts = Post::with('category')->paginate(10);
 
         return view('posts.index', compact('posts'));
@@ -26,9 +25,6 @@ class PostController extends Controller
 
     public function store(PostRequest $request)
     {
-        // $this->authorize("create", Post::class);
-        //
-
         Post::create($request->validated());
 
         return redirect()->route('posts.index');
@@ -36,14 +32,13 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        // $this->authorize("view", Post::class);
-        //
-
         return view('posts.show', compact('post'));
     }
 
     public function edit(Post $post)
     {
+        $this->authorize("update", $post);
+
         $categories = Category::all();
         
         return view('posts.edit', compact(['post', 'categories']));
@@ -51,7 +46,7 @@ class PostController extends Controller
 
     public function update(PostRequest $request,Post $post)
     {
-        // $this->authorize("update", Post::class);
+        $this->authorize("update", $post);
         
         $post->update($request->validated());
 
@@ -60,7 +55,7 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        // $this->authorize("delete", Post::class);
+        $this->authorize("delete", $post);
         
         $post->delete();
 
@@ -69,6 +64,8 @@ class PostController extends Controller
 
     public function ajaxDestroy(Post $post)
     {
+        $this->authorize("delete", $post);
+
         $post->delete();
 
         return response()->json([

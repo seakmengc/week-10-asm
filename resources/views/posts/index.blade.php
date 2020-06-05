@@ -25,20 +25,15 @@
                                 <td>{{ $post->name }}</td>
                                 <td><a href="{{ route('categories.show', $post->category) }}">{{ $post->category->name }}</a></td>
                                 <td>
-                                    <form style="display: inline-block" action="{{ route('posts.show', $post) }}" method="GET">
-                                        <button type="submit" class="btn btn-outline-info">Show</button>
-                                    </form>
-                                    <form style="display: inline-block" action="{{ route('posts.edit', $post) }}" method="GET">
-                                        <button type="submit" class="btn btn-outline-primary">Edit</button>
-                                    </form>
-                                    <form style="display: inline-block" action="{{ route('posts.destroy', $post) }}" method="post">
-                                        @method('DELETE')
-                                        @csrf
+                                    @include('posts.includes.actions.show')
+                                    @can('update', $post)
+                                        @include('posts.includes.actions.edit')
+                                    @endcan
 
-                                        <button type="submit" class="btn btn-outline-danger">Delete</button>
-                                    </form>
-
-                                    <button type="submit" class="btn btn-outline-danger ajax-delete" data-url="{{ route('posts.ajax_delete', $post) }}" data-id="post-{{ $post->id }}">Ajax Delete</button>
+                                    @can('delete', $post)
+                                        @include('posts.includes.actions.delete')
+                                        @include('posts.includes.actions.ajax_delete')
+                                    @endcan
                                 </td>
                             </tr>
                         @empty
@@ -53,9 +48,7 @@
                         {{ $posts->links() }}
                     </div>
 
-                    <div class="pl-3 pb-3">
-                        <a class="btn btn-primary" href="{{ route('posts.create') }}">Add</a>
-                    </div>
+                    @include('posts.includes.actions.add')
                 </div>
 
             </div>
