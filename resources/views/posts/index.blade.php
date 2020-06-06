@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Posts</div>
 
@@ -14,6 +14,7 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Category</th>
+                                <th>Author</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -24,6 +25,8 @@
                                 <td>{{ $ind + 1 }}</td>
                                 <td>{{ $post->name }}</td>
                                 <td><a href="{{ route('categories.show', $post->category) }}">{{ $post->category->name }}</a></td>
+                                <td>{{ $post->author->name }}</td>
+
                                 <td>
                                     @include('posts.includes.actions.show')
                                     @can('update', $post)
